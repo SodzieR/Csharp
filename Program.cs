@@ -3,38 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
-namespace Kolokwium_Zadanie_1
+namespace Kolokwium_Zadanie_2
 {
     class Program
     {
         static void Main(string[] args)
         {
-            StreamReader file = new StreamReader(@"D:\Studenci\Biostatystyka I\Janucik Adrian\Kolokwium Zadanie 1\Zadanie_1_input.txt");
-            StreamWriter file_parzyste = new StreamWriter(@"D:\Studenci\Biostatystyka I\Janucik Adrian\Kolokwium Zadanie 1\Zadanie_1_output_parzyste.txt", true);
-            StreamWriter file_nieparzyste = new StreamWriter(@"D:\Studenci\Biostatystyka I\Janucik Adrian\Kolokwium Zadanie 1\Zadanie_1_output_nieparzyste.txt", true);
-            string file_line = file.ReadLine();
-            string[] numbers_string = file_line.Split(',');
-            int[] numbers_int = new int[numbers_string.Length];
-            int[] parzyste = new int[numbers_int.Length];
-            int[] nieparzyste = new int[numbers_int.Length];
-            for (int i = 0; i < numbers_string.Length; i++)
+            Console.WriteLine("Podaj swój łancuch znaków w ciągu, bez przecinków, z małymi literami bez cyfr.");
+            string znaki = Console.ReadLine();
+            string s1 = "bcdfghjklmnprstwz";
+            string s2 = "zwtsrpnmlkjhgfdcb";
+            Console.Write("Twój zaszyfrowany tekst to: ");
+            for (int i = 0; i < znaki.Length; i++)
             {
-                numbers_int[i] = Convert.ToInt32(numbers_string[i]);
-                if (numbers_int[i] % 2 == 0)
+                char znak = znaki[i];
+                int pozycja_s1 = s1.IndexOf(znaki[i]);
+                if(pozycja_s1 < 0 )
                 {
-                    parzyste[i] = numbers_int[i];
-                    file_parzyste.Write(parzyste[i]+",");
                 }
                 else
                 {
-                    nieparzyste[i] = numbers_int[i];
-                    file_nieparzyste.Write(nieparzyste[i] + ",");
+                    znak = s2[pozycja_s1];
                 }
+                Console.Write(znak);
             }
-            file_parzyste.Close();
-            file_nieparzyste.Close();
             Console.ReadKey();
         }
     }
